@@ -52,11 +52,8 @@ printf "* Detailed results are saved here, use https://github.com/actions/upload
 printf "    %s\n" "$OUTPUT_PATH.report.html" > message
 printf "    %s\n" "$OUTPUT_PATH.report.json" > message
 
-printf message
-printf "test2"
+printf $message
 
-repo = $GITHUB_REPOSITORY
-
-# github.add_comment(repo, PULL_REQUEST_NUMBER, message)
+# github.add_comment($GITHUB_REPOSITORY, $PULL_REQUEST_NUMBER, message)
 
 exit 0
