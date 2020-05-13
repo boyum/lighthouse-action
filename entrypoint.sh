@@ -52,7 +52,7 @@ printf message
 
 json = File.read(ENV.fetch("GITHUB_EVENT_PATH"))
 event = JSON.parse(json)
-repo = event["repository"]["full_name"]
+repo = $(GITHUB_REPOSITORY)
 
 github.add_comment(repo, PULL_REQUEST_NUMBER, message)
 
