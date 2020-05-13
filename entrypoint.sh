@@ -9,6 +9,10 @@ PULL_REQUEST_NUMBER=$(jq .number "$GITHUB_EVENT_PATH")
 # Otherwise, simply check the provided live URL.
 if [ -n "$INPUT_NETLIFY_SITE" ] && [ -n "$PULL_REQUEST_NUMBER" ] && [ "$PULL_REQUEST_NUMBER" != "null" ]; then
   REPORT_URL="https://deploy-preview-$PULL_REQUEST_NUMBER--$INPUT_NETLIFY_SITE"
+elif [ -n "$INPUT_NOW_SITE" ] && [ -n "$GITHUB_REF" ]; then
+  BRANCH_NAME="${GITHUB_REF/refs\/heads/}"
+  FORMATTED_BRANCH_NAME="${BRANCH_NAME//\//-}"
+  REPORT_URL="https://-$INPUT_NOW_SITE-git-$FORMATTED_BRANCH_NAME.now.sh"
 else
   REPORT_URL=$INPUT_URL
 fi
@@ -51,8 +55,8 @@ printf "    %s\n" "$OUTPUT_PATH.report.json" > message
 printf message
 printf "test2"
 
-repo = $(GITHUB_REPOSITORY)
+repo = $GITHUB_REPOSITORY
 
-github.add_comment(repo, PULL_REQUEST_NUMBER, message)
+# github.add_comment(repo, PULL_REQUEST_NUMBER, message)
 
 exit 0
