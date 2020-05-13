@@ -52,6 +52,4 @@ printf "* Detailed results are saved here, use https://github.com/actions/upload
 printf "    %s\n" "$OUTPUT_PATH.report.html"
 printf "    %s\n" "$OUTPUT_PATH.report.json"
 
-# github.add_comment($GITHUB_REPOSITORY, $PULL_REQUEST_NUMBER, message)
-
 exit 0
