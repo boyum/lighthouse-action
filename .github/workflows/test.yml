@@ -11,7 +11,7 @@ jobs:
     - name: Run audit on https://github.com/
       uses: ./
       with:
-        now_site: sindre-is
+        url: 'https://github.com/'
     - uses: actions/upload-artifact@master
       with:
         name: report
