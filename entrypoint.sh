@@ -9,10 +9,10 @@ PULL_REQUEST_NUMBER=$(jq .number "$GITHUB_EVENT_PATH")
 # Otherwise, simply check the provided live URL.
 if [ -n "$INPUT_NETLIFY_SITE" ] && [ -n "$PULL_REQUEST_NUMBER" ] && [ "$PULL_REQUEST_NUMBER" != "null" ]; then
   REPORT_URL="https://deploy-preview-$PULL_REQUEST_NUMBER--$INPUT_NETLIFY_SITE"
-elif [ -n "$INPUT_NOW_SITE" ] && [ -n "$GITHUB_REF" ] && [ $GITHUB_REF != "/refs/pull-$PULL_REQUEST_NUMBER-merge" ]; then
+elif [ -n "$INPUT_NOW_SITE" ] && [ -n "$INPUT_NOW_USERNAME" ] && [ -n "$GITHUB_REF" ] && [ $GITHUB_REF != "/refs/pull-$PULL_REQUEST_NUMBER-merge" ]; then
   BRANCH_NAME="${GITHUB_REF/refs\/heads\//}"
   FORMATTED_BRANCH_NAME="${BRANCH_NAME//\//-}"
-  REPORT_URL="https://$INPUT_NOW_SITE-git-$FORMATTED_BRANCH_NAME.now.sh"
+  REPORT_URL="https://$INPUT_NOW_SITE-git-$FORMATTED_BRANCH_NAME.$INPUT_NOW_USERNAME.now.sh"
 else
   REPORT_URL=$INPUT_URL
 fi

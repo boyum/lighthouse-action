@@ -65,6 +65,32 @@ jobs:
 
 On pull requests, the PR number will be extracted from the GitHub event data and used to generate the deploy preview URL as follows: `https://deploy-preview-[[PR_NUMBER]]--[[NETLIFY_SITE]].netlify.com`. You can combine the two above examples and include both `url` and `netlify_site` and run on `on: [push, pull_request]` and the appropriate URL will be automatically selected depending on the type of event.
 
+### Pull Request Audits with [Vercel for GitHub](https://vercel.com/docs/v2/git-integrations/vercel-for-github)
+
+<p align="center"><img src="https://raw.githubusercontent.com/jakejarvis/lighthouse-action/master/screenshots/vercel-logo.svg" alt="Vercel" width="300"></p>
+
+It's also possible to test Now PR deployments. It's required to pass both the name of the Now project, and the owner's username:
+
+```yaml
+name: Audit pull request
+on: push # this can only be run on `push`
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Audit Now PR deployment
+      uses: jakejarvis/lighthouse-action@master
+      with:
+        now_site: my-site
+        now_username: my-username
+    - uses: actions/upload-artifact@master
+      with:
+        name: report
+        path: './report'
+```
+
+Now creates a deployment on `https://[[now_site]]-git-[[branch-name]].username.now.sh` which will be audited.
 
 ## To-Do
 
