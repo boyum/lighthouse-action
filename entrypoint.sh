@@ -50,8 +50,6 @@ printf "    %s\n" "$OUTPUT_PATH.report.json" > message
 
 printf message
 
-json = File.read(ENV.fetch("GITHUB_EVENT_PATH"))
-event = JSON.parse(json)
 repo = $(GITHUB_REPOSITORY)
 
 github.add_comment(repo, PULL_REQUEST_NUMBER, message)
