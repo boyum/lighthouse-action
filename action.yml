@@ -1,0 +1,26 @@
+name: Lighthouse Audit
+description: ''
+inputs:
+  url:
+    description: The url to be tested
+    required: false
+  now_site:
+    description: The name of the Vercel Now project. Requires now_username to be set
+    required: false
+  now_username:
+    description: The Vercel Now project owner. Requires now_site to be set
+    required: false
+  netlify_site:
+    description: The name of the Netlify site
+    required: false
+outputs:
+  result:
+    description: The Lighthouse audit result
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.url }}
+    - ${{ inputs.now_site }}
+    - ${{ inputs.now_username }}
+    - ${{ inputs.netlify_site }}
